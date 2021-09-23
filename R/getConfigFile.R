@@ -1,9 +1,9 @@
 #' App structure
 #' @name getConfigFile
-#' @param root
-#' @description App to start geoapp
+#' @param root Root path
+#' @description QC of all data
 #'
-#' @import logging
+#' @import dplyr, XML, tidyverse, SimRAD, seqinr, data.table, phylotools, biomartr
 #' @return configFile
 #'
 #' @author Alberto Rodriguez-Izquierdo, 2021
@@ -22,7 +22,7 @@ getConfigFile <- function(root){
   #------------------Validation nodes----------------------#
 
   configFile <- nodesValidation(configFile)
-  
+
 
   ######--------------Validation nodes content --------------######
 
@@ -31,7 +31,7 @@ getConfigFile <- function(root){
   #Validate generalParameters
 
 ###-----------------------Validation data-----------------------###
-  
+
   validateDataPath          <- validateCharacter(configFile$data$dataPath)
 
   configFile$data$dataPath  <- validateDataPath
@@ -43,82 +43,82 @@ getConfigFile <- function(root){
   validateEnzymeDB          <- validateCharacter(configFile$data$enzyme_db)
 
   configFile$data$enzyme_db <- validateEnzymeDB
-  
-  
+
+
   ###----------------------Validation parameters---------------###
 
   validateTypeAnalysis                                              <- validateCharacter(configFile$parameters$typeAnalysis)
-  
+
   configFile$parameters$typeAnalysis                                <- validateTypeAnalysis
-  
+
   validateIfRestriction                                             <- validateCharacter(configFile$parameters$ifRestriction)
-  
+
   configFile$parameters$ifRestriction                               <- validateIfRestriction
-  
+
   validateEnzymeSelection                                           <- validateCharacter(configFile$parameters$combination$enzyme_selection)
-        
+
   validateEnzymeSelection                                           <- unlist(strsplit(validateEnzymeSelection, ','))
-        
+
   configFile$parameters$combination$enzyme_selection                <- validateEnzymeSelection
-        
+
   validateUseRepEnzyme                                              <- validateCharacter(configFile$parameters$replicate_enzyme$use_replicate)
-  
+
   configFile$parameters$replicate_enzyme$use_replicate              <- validateUseRepEnzyme
-  
+
   validateRepEnzymeSel                                              <- validateCharacter(configFile$parameters$replicate_enzyme$enzyme_selection)
-  
+
   configFile$parameters$replicate_enzyme$enzyme_selection           <- validateRepEnzymeSel
-  
+
   validateRepEnzymeNb                                               <- validateNumber(configFile$parameters$replicate_enzyme$nb_repeat)
-  
+
   configFile$parameters$replicate_enzyme$nb_repeat                  <- validateRepEnzymeNb
-  
+
   validateRandomNb                                                  <- validateNumber(configFile$parameters$random_genome_fragmentation$nb_fragments)
-  
+
   configFile$parameters$random_genome_fragmentation$nb_fragments    <- validateRandomNb
-  
+
   validateRandomRepe                                                <- validateNumber(configFile$parameters$random_genome_fragmentation$nb_repeat)
-  
+
   configFile$parameters$random_genome_fragmentation$nb_repeat       <- validateRandomRepe
-  
+
   validateUseCalculate                                              <- validateCharacter(configFile$parameters$calculatePosition$use_calculate)
-  
+
   configFile$parameters$calculatePosition$use_calculate             <- validateUseCalculate
-  
+
   validateAlignmentPath                                             <- validateCharacter(configFile$parameters$calculatePosition$alignment_path)
-  
+
   configFile$parameters$calculatePosition$alignment_path            <- validateAlignmentPath
-  
+
   validateGffFile                                                   <- validateCharacter(configFile$parameters$calculatePosition$gffFile)
-  
+
   configFile$parameters$calculatePosition$gffFile                   <- validateGffFile
-  
+
   validateOutputPath                                                <- validateCharacter(configFile$parameters$calculatePosition$outputPath)
-  
+
   configFile$parameters$calculatePosition$outputPath                <- validateOutputPath
 
   validateCategory                                                  <- validateCharacter(configFile$parameters$calculatePosition$category)
-  
+
   configFile$parameters$calculatePosition$category                  <- validateCategory
 
   validateMinSize                                                   <- validateNumber(configFile$parameters$min.size)
-                
+
   configFile$parameters$min.size                                    <- validateMinSize
-                
+
   validateMaxSize                                                   <- validateNumber(configFile$parameters$max.size)
-                  
+
   configFile$parameters$max.size                                    <- validateMaxSize
-  
+
   ###-----------------------Validate Output--------------------###
-  
+
   validateUseOutput                      <- validateCharacter(configFile$output$use_output)
-  
+
   configFile$output$use_output         <- validateUseOutput
-  
+
   validateOutput                      <- validateCharacter(configFile$output$outputDir)
-  
+
   configFile$output$outputDir         <- validateOutput
-  
+
 
   return (configFile)
 }
@@ -167,7 +167,7 @@ readConfigFile <- function(root){
 nodesValidation <- function(configFile){
 
   #Building list with principal and secondary nodes for validation
-  
+
   principalNodes              <- c('data','parameters','output')
 
   dataNodes                   <- c('dataPath','genome', 'enzyme_db')
@@ -178,15 +178,15 @@ nodesValidation <- function(configFile){
                                    'replicate_enzyme',
                                    'random_genome_fragmentation',
                                    'calculatePosition',
-                                   'max.size', 
+                                   'max.size',
                                    'min.size')
-  
+
   combinationNodes            <- c('enzyme_selection')
-  
+
   replicateNodes              <- c('enzyme_selection', 'nb_repeat')
-  
+
   randomGenNodes              <- c('nb_fragments', 'nb_repeat')
-  
+
   calculatePositionNodes      <- c('alignment_path','gffFile','outputPath', 'category')
 
   outputNodes                 <- c('use_output','outputDir')
@@ -200,13 +200,13 @@ nodesValidation <- function(configFile){
   ValParametersNodes            <- validateConfigNodes(parametersNodes, configFile$parameters)
 
   ValCombinationNodes           <- validateConfigNodes(combinationNodes, configFile$parameters$combination)
-  
+
   ValReplicateNodes             <- validateConfigNodes(replicateNodes, configFile$parameters$replicate_enzyme)
-  
+
   valRandomGenNodes             <- validateConfigNodes(randomGenNodes, configFile$parameters$random_genome_fragmentation)
-  
+
   valCalculatePositionNodes     <- validateConfigNodes(calculatePositionNodes, configFile$parameters$calculatePosition)
-  
+
   ValOutputNodes                <- validateConfigNodes(outputNodes, configFile$output)
 
 
@@ -229,7 +229,7 @@ nodesValidation <- function(configFile){
 
 
 validateConfigNodes <- function (nodes, configFile){
-  
+
   if (!is.list(nodes)){
     for (x in nodes){
       if (!(x %in% names(configFile))){
