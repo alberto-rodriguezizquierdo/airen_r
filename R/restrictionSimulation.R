@@ -1,14 +1,15 @@
+#' App structure
 #' @name restrictionSimulation
 #' @description Performance of in-silico restriction simulation from reference genome
-#' @param dnaseq
-#' @param enzyme_db
-#' @param min.size
-#' @param max.size
-#' @param type_analysis
-#' @param enzyme_selection
-#' @param nb_repeat
-#' @param use_output
-#' @param outputDir
+#' @param dnaseq File genomic data
+#' @param enzyme_db Enzyme DB
+#' @param min.size min size of length fragment
+#' @param max.size max size of length fragment
+#' @param type_analysis definition of analysis
+#' @param enzyme_selection if selection enzymes, specify
+#' @param nb_repeat number of repetitions
+#' @param use_output Create output optional
+#' @param outputDir output path
 #' @import dplyr, XML, tidyverse, SimRAD, seqinr, data.table, phylotools, biomartr
 #' @return results
 #' @author Alberto Rodriguez-Izquierdo, 2021
@@ -26,7 +27,164 @@ restrictionSimulation <- function(dnaseq,
                                   use_output = NULL,
                                   outputDir=NULL,
                                   wd=NULL){
-  browser()
+
+  #############---------Check QC data entry--------------#############
+
+  ValDnaseq          <- validateCharacter(dnaseq)
+
+  if (!isTRUE(str_detect(ValDnaseq, '.fasta', negate = FALSE))){
+
+    if (!isTRUE(str_detect(ValDnaseq, '.fa', negate = FALSE))){
+
+      print('File is not a FASTA file! Please check the file (.fa, .fasta)')
+
+      stop(restrictionSimulation)
+
+    }
+  }
+
+  dnaseq <- ValDnaseq
+
+  ##############--------------------------------------------#########
+
+  Valenzyme_db <- validateCharacter(Valenzyme_db)
+
+  enzyme_db <- Valenzyme_db
+
+
+  ##############--------------------------------------------#########
+
+  Valminsize <- validateNumber(min.size)
+
+  if (!is.integer(Valminsize)){
+
+    print('Please input a number')
+
+    stop(restrictionSimulation)
+
+  }
+
+  min.size <- Valminsize
+
+  ##############--------------------------------------------#########
+
+  Valmaxsize <- validateNumber(max.size)
+
+  if (!is.integer(Valmaxsize)){
+
+    print('Please input a number')
+
+    stop(restrictionSimulation)
+
+  }
+
+  max.size <- Valmaxsize
+
+
+  ##############--------------------------------------------#########
+
+  ValtypeAnalysis <- validateCharacter(type_analysis)
+
+  if (ValtypeAnalysis =='finding'){
+
+    type_analysis <- ValtypeAnalysis
+
+    }else if(ValtypeAnalysis == 'combination'){
+
+        if (!is.null(Valenzyme_selection)){
+
+          if(!length(enzyme_selection)>1){
+
+            Valenzyme_selection <- validateCharacter(enzyme_selection)
+
+          }else{
+
+              valenzyme_selection <- enzyme_selection
+
+          }
+
+          for (enz in Valenzyme_selection){
+
+            if (!str_detect(enzyme_db, enz)){
+
+              print(paste0('Enzyme ', enz, ' not detected in database. Please try other enzyme'))
+
+              stop(restrictionSimulation)
+
+            }
+
+          }
+
+          enzyme_selection <- Valenzyme_selection
+
+        }else{
+
+          print ('Please input the name of the restriction enzyme/s')
+
+          stop(restrictionSimulation)
+
+        }
+
+    }else if(ValtypeAnalysis == 'replicate'){
+
+
+      if (!is.null(Valenzyme_selection)){
+
+        if(!length(enzyme_selection)>1){
+
+          Valenzyme_selection <- validateCharacter(enzyme_selection)
+
+        }else{
+
+          valenzyme_selection <- enzyme_selection
+
+        }
+
+        for (enz in Valenzyme_selection){
+
+          if (!str_detect(enzyme_db, enz)){
+
+            print(paste0('Enzyme ', enz, ' not detected in database. Please try other enzyme'))
+
+            stop(restrictionSimulation)
+
+          }
+
+        }
+
+        enzyme_selection <- Valenzyme_selection
+
+      }else{
+
+        print ('Please input the name of the restriction enzyme/s')
+
+        stop(restrictionSimulation)
+
+      }
+
+      ValNbRepeat <- validateNumber(nb_repeat)
+
+      if (!is.integer(ValNbRepeat)){
+
+        print('Number of repeats must be integer.')
+
+        stop(restrictionSimulation)
+
+      }
+
+    }else{
+
+      print('Please choose the type of analysis ("finding","combination" or "replicate")')
+
+      stop(restrictionSimulation)
+
+
+    }
+
+
+
+
+  #############--------Starting function--------------#############
 
   load(file=enzyme_db)
 
@@ -291,6 +449,7 @@ restrictionSimulation <- function(dnaseq,
 }
 
 
+#' App structure
 #' @name graph_generator
 #' @description Graph generation from in-silico digestion.
 #' @param sequences Sequences to be graphed

@@ -1,3 +1,4 @@
+#' App structure
 #' @name outputGeneration
 #' @description Designing output
 #' @param results Input of results

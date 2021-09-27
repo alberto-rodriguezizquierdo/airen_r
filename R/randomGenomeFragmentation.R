@@ -1,3 +1,4 @@
+#' App structure
 #' @name randomGenomeFragmentation
 #' @description Generation of random fragmentation from reference genome
 #' @param genome_path Genome path in fasta format

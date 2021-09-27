@@ -1,3 +1,4 @@
+#' App structure
 #' @name calculatePositionFragment
 #'
 #' @description Function that calculates the position of the founded fragments in sequencing.

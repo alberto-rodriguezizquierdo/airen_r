@@ -126,7 +126,7 @@ getConfigFile <- function(root){
 
 #' App structure
 #' @name readConfigFile
-#' @param root
+#' @param root working directory
 #' @description App to start geoapp
 #'
 #' @import logging, XML
@@ -157,8 +157,9 @@ readConfigFile <- function(root){
 
 
 
+#' App structure
 #' @name nodesValidation
-#' @param configFile
+#' @param configFile configFile
 #' @return configFile
 #'
 #' @author Alberto Rodriguez-Izquierdo, 2021
@@ -218,14 +219,14 @@ nodesValidation <- function(configFile){
 
 
 #' App structure
-#' @name validateNodes
-#' @param configFile
+#' @name validateConfigNodes
+#' @param configFile configFile
 #' @description App to start geoapp
 #'
 #' @import logging, XML
 #' @return configFile
 #'
-#' @author Alberto Rodríguez Izquierdo
+#' @author Alberto Rodríguez Izquierdo, 2021
 
 
 validateConfigNodes <- function (nodes, configFile){
@@ -258,13 +259,13 @@ validateConfigNodes <- function (nodes, configFile){
 
 #' App structure
 #' @name ValidateCharacter
-#' @param configFile
+#' @param configFile configFile
 #' @description App to start geoapp
 #'
 #' @import logging, XML
 #' @return configFile
 #'
-#' @author Alberto Rodríguez Izquierdo
+#' @author Alberto Rodríguez Izquierdo, 2021
 
 
 validateCharacter <- function(configFile){
@@ -288,13 +289,13 @@ validateCharacter <- function(configFile){
 
 #' App structure
 #' @name ValidateNumber
-#' @param configFile
+#' @param configFile configFile
 #' @description App to start geoapp
 #'
 #' @import logging, XML
 #' @return configFile
 #'
-#' @author Alberto Rodríguez Izquierdo
+#' @author Alberto Rodríguez Izquierdo, 2021
 
 
 
