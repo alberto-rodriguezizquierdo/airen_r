@@ -1,18 +1,11 @@
-#' randomGenomeFragmentation
+#' @title RandomGenomicFrag
 #' @name randomGenomeFragmentation
 #' @description Generation of random fragmentation from reference genome
 #' @param genome_path Genome path in fasta format
 #' @param max_size max size fragments
 #' @param min_size min size fragments
 #' @param nb_repeats number of repeats for random fragmentation.
-#' @import dplyr
-#' @import XML
-#' @import tidyverse
-#' @import SimRAD
-#' @import seqinr
-#' @import data.table
-#' @import phylotools
-#' @import biomartr
+#' @export
 #' @return fragmentRes
 #' @author Alberto Rodriguez-Izquierdo, 2021
 

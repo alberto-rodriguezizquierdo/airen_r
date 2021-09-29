@@ -1,4 +1,4 @@
-#' App structure
+#' @title validations Char
 #' @name ValidateCharacter
 #' @param configFile configFile
 #' @description App to start geoapp
@@ -28,7 +28,7 @@ validateCharacter <- function(configFile){
 }
 
 
-#' App structure
+#' @title Validations Number
 #' @name ValidateNumber
 #' @param configFile configFile
 #' @description App to start geoapp

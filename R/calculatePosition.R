@@ -1,4 +1,4 @@
-#' App structure
+#' @title CalculatePos
 #' @name calculatePositionFragment
 #'
 #' @description Function that calculates the position of the founded fragments in sequencing.
@@ -6,7 +6,13 @@
 #' @param alignment_path SAM/BAM files with all alignment positiions
 #' @param gffPath GTF/GFF path
 #' @param category Category to calculate position.
+#' @import stringr
+#' @import dplyr
+#' @import data.table
+#' @import biomartr
+#' @import tidyverse
 #'
+#' @export
 #'
 #' @author Alberto Rodriguez-Izquierdo
 

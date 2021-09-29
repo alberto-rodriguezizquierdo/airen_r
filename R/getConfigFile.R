@@ -1,4 +1,4 @@
-#' App structure
+#' @title ConfigFileGet
 #' @name getConfigFile
 #' @param root Root path
 #' @description QC of all data
@@ -7,7 +7,6 @@
 #' @import XML
 #' @import tidyverse
 #' @import SimRAD
-#' @import seqinr
 #' @import data.table
 #' @import phylotools
 #' @import biomartr
@@ -131,7 +130,7 @@ getConfigFile <- function(root){
 }
 
 
-#' App structure
+#' @title ConfigReading
 #' @name readConfigFile
 #' @param root working directory
 #' @description App to start geoapp
@@ -164,7 +163,7 @@ readConfigFile <- function(root){
 
 
 
-#' App structure
+#' @title ConfigValidationsNodes
 #' @name nodesValidation
 #' @param configFile configFile
 #' @return configFile
@@ -225,7 +224,7 @@ nodesValidation <- function(configFile){
 
 
 
-#' App structure
+#' @title ConfigValidations
 #' @name validateConfigNodes
 #' @param configFile configFile
 #' @description App to start geoapp

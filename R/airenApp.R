@@ -1,10 +1,9 @@
-#' App structure
+#' @title AppLauncher
 #' @name airenApp
 #' @description hands-on airenbox
 #' @param root working directory
 #' @import dplyr
 #' @import SimRAD
-#' @import seqinr
 #' @import XML
 #' @author Alberto Rodriguez-Izquierdo, 2021
 

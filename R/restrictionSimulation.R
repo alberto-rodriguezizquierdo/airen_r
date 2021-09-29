@@ -1,4 +1,4 @@
-#' App structure
+#' @title SimulationRE
 #' @name restrictionSimulation
 #' @description Performance of in-silico restriction simulation from reference genome
 #' @param dnaseq File genomic data
@@ -14,10 +14,10 @@
 #' @import XML
 #' @import tidyverse
 #' @import SimRAD
-#' @import seqinr
 #' @import data.table
 #' @import phylotools
 #' @import biomartr
+#' @export
 #' @return results
 #' @author Alberto Rodriguez-Izquierdo, 2021
 
@@ -457,7 +457,7 @@ restrictionSimulation <- function(dnaseq,
 }
 
 
-#' graph_generator
+#' @title graph_gen
 #' @name graph_generator
 #' @description Graph generation from in-silico digestion.
 #' @param sequences Sequences to be graphed
@@ -470,7 +470,6 @@ restrictionSimulation <- function(dnaseq,
 #' @import dplyr
 #' @import tidyverse
 #' @import SimRAD
-#' @import seqinr
 #' @import data.table
 #' @author Rodriguez-Izquierdo, Alberto, 2021
 #'
