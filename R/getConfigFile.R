@@ -3,7 +3,14 @@
 #' @param root Root path
 #' @description QC of all data
 #'
-#' @import dplyr, XML, tidyverse, SimRAD, seqinr, data.table, phylotools, biomartr
+#' @import dplyr
+#' @import XML
+#' @import tidyverse
+#' @import SimRAD
+#' @import seqinr
+#' @import data.table
+#' @import phylotools
+#' @import biomartr
 #' @return configFile
 #'
 #' @author Alberto Rodriguez-Izquierdo, 2021
