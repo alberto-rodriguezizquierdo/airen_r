@@ -66,7 +66,7 @@ calculatePositionFragment <- function(count_dir,
 
   ValCategory <- validateCharacter(category)
 
-  if(!isTRUE(str_detect(gfffile, ValCategory))){
+  if(!isTRUE(any(str_detect(gfffile$type, ValCategory)))){
 
     print(paste0('Category ', category, ' is not present in GFF file. Please check availability in the GFF'))
 
@@ -168,7 +168,7 @@ calculatePositionFragment <- function(count_dir,
 
         chrselected                         <- filter(genes, seqid == identifiedGenes$chrpos[genesselection])
 
-        value_finding                       <- filter(genes, start == chrselected$V4[which.min(abs(chrselected$start - identifiedGenes$positionFragmentInit[genesselection]))])
+        value_finding                       <- filter(genes, start == chrselected$start[which.min(abs(chrselected$start - identifiedGenes$positionFragmentInit[genesselection]))])
 
         if(value_finding$strand == '+'){
 
