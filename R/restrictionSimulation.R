@@ -10,7 +10,14 @@
 #' @param nb_repeat number of repetitions
 #' @param use_output Create output optional
 #' @param outputDir output path
-#' @import dplyr, XML, tidyverse, SimRAD, seqinr, data.table, phylotools, biomartr
+#' @import dplyr
+#' @import XML
+#' @import tidyverse
+#' @import SimRAD
+#' @import seqinr
+#' @import data.table
+#' @import phylotools
+#' @import biomartr
 #' @return results
 #' @author Alberto Rodriguez-Izquierdo, 2021
 
@@ -450,7 +457,7 @@ restrictionSimulation <- function(dnaseq,
 }
 
 
-#' App structure
+#' graph_generator
 #' @name graph_generator
 #' @description Graph generation from in-silico digestion.
 #' @param sequences Sequences to be graphed
@@ -460,7 +467,11 @@ restrictionSimulation <- function(dnaseq,
 #' @param configFile configFile
 #' @param nrepeat number of repetitions
 #' @param use_replicate if use replicate
-#' @import dplyr, XML, tidyverse, SimRAD, seqinr, data.table, phylotools, biomartr
+#' @import dplyr
+#' @import tidyverse
+#' @import SimRAD
+#' @import seqinr
+#' @import data.table
 #' @author Rodriguez-Izquierdo, Alberto, 2021
 #'
 

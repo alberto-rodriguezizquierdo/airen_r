@@ -2,7 +2,10 @@
 #' @name airenApp
 #' @description hands-on airenbox
 #' @param root working directory
-#' @import dplyr, SimRAD, seqinr, XML
+#' @import dplyr
+#' @import SimRAD
+#' @import seqinr
+#' @import XML
 #' @author Alberto Rodriguez-Izquierdo, 2021
 
 airenApp <- function(root){
