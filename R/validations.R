@@ -3,7 +3,7 @@
 #' @param configFile configFile
 #' @description App to start geoapp
 #'
-#' @import logging, XML
+#' @import XML
 #' @return configFile
 #'
 #' @author Alberto Rodríguez Izquierdo, 2021
@@ -33,7 +33,7 @@ validateCharacter <- function(configFile){
 #' @param configFile configFile
 #' @description App to start geoapp
 #'
-#' @import logging, XML
+#' @import XML
 #' @return configFile
 #'
 #' @author Alberto Rodríguez Izquierdo, 2021
