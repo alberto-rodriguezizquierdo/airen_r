@@ -129,7 +129,7 @@ getConfigFile <- function(root){
 #' @param root working directory
 #' @description App to start geoapp
 #'
-#' @import logging, XML
+#' @import XML
 #' @return configFile
 #'
 #' @author Alberto Rodriguez-Izquierdo, 2021
@@ -223,7 +223,7 @@ nodesValidation <- function(configFile){
 #' @param configFile configFile
 #' @description App to start geoapp
 #'
-#' @import logging, XML
+#' @import XML
 #' @return configFile
 #'
 #' @author Alberto Rodríguez Izquierdo, 2021
